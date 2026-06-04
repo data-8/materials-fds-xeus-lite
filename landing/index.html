@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data 8 · Foundations of Data Science · Schedule</title>
+  <link rel="icon" type="image/png" href="./data8logo.png">
+  <script id="jupyter-config-data" type="application/json" data-jupyter-lite-root=".">
+    {}
+  </script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f7fb;
+      --card: #fff;
+      --text: #14213d;
+      --muted: #5c6478;
+      --accent: #003262;
+      --accent-hover: #004e8c;
+      --gold: #fdb515;
+      --border: rgba(20, 33, 61, 0.12);
+      --row-alt: rgba(0, 50, 98, 0.04);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1419;
+        --card: #1a2332;
+        --text: #e8ecf4;
+        --muted: #9aa5b8;
+        --accent: #7eb8da;
+        --accent-hover: #a8d4f0;
+        --gold: #fdb515;
+        --border: rgba(232, 236, 244, 0.12);
+        --row-alt: rgba(126, 184, 218, 0.08);
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--accent) 0%, #001d3d 100%);
+      color: #fff;
+      padding: 2.5rem 1.25rem 2rem;
+    }
+    .hero-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+    .hero-inner.hero-layout {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.75rem 2rem;
+    }
+    .hero-copy {
+      flex: 1 1 18rem;
+      min-width: 0;
+    }
+    .hero-brand {
+      flex: 0 0 auto;
+    }
+    .hero-brand img {
+      display: block;
+      max-width: min(240px, 100%);
+      height: auto;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero .tagline {
+      font-size: 1.05rem;
+      opacity: 0.92;
+      max-width: 40rem;
+      margin: 0 0 1.25rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .hero a.btn {
+      display: inline-block;
+      padding: 0.6rem 1.15rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      background: var(--gold);
+      color: #14213d;
+    }
+    .hero a.btn:hover { filter: brightness(1.05); }
+    .hero a.btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+    }
+    .hero a.btn-outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .hero-links {
+      margin-top: 1rem;
+      font-size: 0.92rem;
+      opacity: 0.88;
+    }
+    .hero-links a {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    main {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 3rem;
+    }
+    .intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+    .intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .intro strong { color: var(--text); }
+    .schedule-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+    table.schedule {
+      width: 100%;
+      min-width: 58rem;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .schedule th,
+    .schedule td {
+      padding: 0.55rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+    .schedule thead th {
+      position: sticky;
+      top: 0;
+      background: var(--card);
+      font-weight: 600;
+      z-index: 1;
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .schedule tbody tr:nth-child(even) { background: var(--row-alt); }
+    .schedule td.week {
+      font-weight: 600;
+      white-space: nowrap;
+      background: var(--row-alt);
+    }
+    .schedule td.num { text-align: center; color: var(--muted); }
+    .schedule a {
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .schedule a:hover { text-decoration: underline; }
+    .muted { color: var(--muted); }
+    .holiday { font-style: italic; color: var(--muted); }
+    caption {
+      caption-side: top;
+      text-align: left;
+      padding: 1rem 1rem 0.75rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    footer.site {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 72rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    footer.site a { color: var(--accent); }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner hero-layout">
+      <div class="hero-copy">
+        <h1>Foundations of Data Science</h1>
+        <p class="tagline">
+          Example term calendar (lecture topics, readings, labs, homework, and projects) aligned with the public
+          <a href="https://github.com/data-8/materials-fds" style="color: inherit;">Data 8 materials</a>.
+          Open any linked notebook here in your browser—no installation required.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="./lab/index.html">Open notebooks</a>
+          <a class="btn btn-outline" href="./lab/index.html?path=README.md">Course overview</a>
+        </div>
+        <p class="hero-links">
+          Textbook (free online):
+          <a href="https://www.inferentialthinking.com/">Computational and Inferential Thinking</a>
+        </p>
+      </div>
+      <div class="hero-brand">
+        <img src="./data8logo.png" width="280" height="280" alt="Data 8">
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        <strong>How to use this page:</strong> Open the <em>lecture notebook</em> when listed, watch the lecture <em>video</em> on YouTube when available,
+        follow <em>reading</em> links in the free textbook, and use <em>assignments</em> for labs, homework, and projects.
+        Your instructor’s syllabus is the final word on what to submit and when. Slides and section worksheets are often shared separately by course staff.
+      </p>
+    </div>
+
+    <div class="schedule-wrap">
+      <table class="schedule">
+        <caption>Weekly schedule</caption>
+        <thead>
+          <tr>
+            <th scope="col">Week</th>
+            <th scope="col">#</th>
+            <th scope="col">Topic</th>
+            <th scope="col">Lecture</th>
+            <th scope="col">Video</th>
+            <th scope="col">Reading</th>
+            <th scope="col">Assignments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="week" rowspan="2">Week 1</td>
+            <td class="num">1</td>
+            <td>Introduction</td>
+            <td><a href="./lab/index.html?path=lectures/lec01.ipynb">Demo</a></td>
+            <td><a href="https://www.youtube.com/watch?v=A67W58MDonk&list=PL3juAj0fqNsLLBRFnTAby0VjByHoFb0qQ" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/01/1/intro.html">1.1</a>,
+              <a href="https://www.inferentialthinking.com/chapters/01/2/why-data-science.html">1.2</a>,
+              <a href="https://www.inferentialthinking.com/chapters/01/3/Plotting_the_Classics.html">1.3</a></td>
+            <td><a href="./lab/index.html?path=lab/lab01/lab01.ipynb">Lab 1 · Expressions</a></td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>Cause and Effect</td>
+            <td class="muted">—</td>
+            <td><a href="https://www.youtube.com/watch?v=GEjqkHexELI" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/02/causality-and-experiments.html">Ch. 2</a></td>
+            <td><a href="./lab/index.html?path=hw/hw01/hw01.ipynb">Homework 1</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 2</td>
+            <td class="num">3</td>
+            <td>Tables</td>
+            <td><a href="./lab/index.html?path=lectures/lec03.ipynb">Demo</a></td>
+            <td><a href="https://www.youtube.com/watch?v=oTPPF5axPck" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/03/programming-in-python.html">Ch. 3</a></td>
+            <td><a href="./lab/index.html?path=lab/lab02/lab02.ipynb">Lab 2 · Table operations</a></td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>Data Types</td>
+            <td><a href="./lab/index.html?path=lectures/lec04.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/G8y-a64esvw" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/04/Data_Types.html">Ch. 4</a>,
+              <a href="https://www.inferentialthinking.com/chapters/05/Sequences.html">Ch. 5</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">5</td>
+            <td>Building Tables</td>
+            <td><a href="./lab/index.html?path=lectures/lec05.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/PKyK1fd_81s" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/06/1/Sorting_Rows.html">6.1</a>,
+              <a href="https://www.inferentialthinking.com/chapters/06/2/Selecting_Rows.html">6.2</a></td>
+            <td><a href="./lab/index.html?path=hw/hw02/hw02.ipynb">Homework 2</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 3</td>
+            <td class="num">6</td>
+            <td>Census</td>
+            <td><a href="./lab/index.html?path=lectures/lec06.ipynb">Demo</a></td>
+            <td><a href="https://www.youtube.com/watch?v=NH09Fjdl56A" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/06/3/Example_Population_Trends.html">6.3</a>,
+              <a href="https://www.inferentialthinking.com/chapters/06/4/Example_Sex_Ratios.html">6.4</a></td>
+            <td><a href="./lab/index.html?path=lab/lab03/lab03.ipynb">Lab 3 · Data types &amp; tables</a></td>
+          </tr>
+          <tr>
+            <td class="num">7</td>
+            <td>Charts</td>
+            <td><a href="./lab/index.html?path=lectures/lec07.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/ZUZ2yFs3WQI" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/07/Visualization.html">Ch. 7</a>,
+              <a href="https://www.inferentialthinking.com/chapters/07/1/Visualizing_Categorical_Distributions.html">7.1</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">8</td>
+            <td>Histograms</td>
+            <td><a href="./lab/index.html?path=lectures/lec08.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/DIsb7yIqaI4" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/07/2/Visualizing_Numerical_Distributions.html">7.2</a>,
+              <a href="https://www.inferentialthinking.com/chapters/07/3/Overlaid_Graphs.html">7.3</a></td>
+            <td><a href="./lab/index.html?path=hw/hw03/hw03.ipynb">Homework 3</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 4</td>
+            <td class="num">9</td>
+            <td>Functions</td>
+            <td><a href="./lab/index.html?path=lectures/lec09.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/l5DS6dk3kIA" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/08/Functions_and_Tables.html">Ch. 8</a>,
+              <a href="https://www.inferentialthinking.com/chapters/08/1/Applying_a_Function_to_a_Column.html">8.1</a></td>
+            <td><a href="./lab/index.html?path=lab/lab04/lab04.ipynb">Lab 4 · Functions &amp; visualizations</a></td>
+          </tr>
+          <tr>
+            <td class="num">10</td>
+            <td>Groups</td>
+            <td><a href="./lab/index.html?path=lectures/lec10.ipynb">Demo</a></td>
+            <td><a href="https://www.youtube.com/watch?v=acK3KAagCUc" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/08/2/Classifying_by_One_Variable.html">8.2</a>,
+              <a href="https://www.inferentialthinking.com/chapters/08/3/Cross-Classifying_by_More_than_One_Variable.html">8.3</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">11</td>
+            <td>Pivots and Joins</td>
+            <td><a href="./lab/index.html?path=lectures/lec11.ipynb">Demo</a></td>
+            <td><a href="https://www.youtube.com/watch?v=ZKsdrPVc61g" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/08/4/Joining_Tables_by_Columns.html">8.4</a></td>
+            <td>
+              <a href="./lab/index.html?path=hw/hw04/hw04.ipynb">Homework 4</a><br>
+              <a href="./lab/index.html?path=project/project1/project1.ipynb">Project 1 · World progress</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 5</td>
+            <td class="num">12</td>
+            <td>Table Examples</td>
+            <td><a href="./lab/index.html?path=lectures/lec12.ipynb">Demo</a></td>
+            <td><a href="https://www.youtube.com/watch?v=VvzHwI85Lg8" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/08/5/Bike_Sharing_in_the_Bay_Area.html">8.5</a></td>
+            <td><a href="./lab/index.html?path=project/project1/project1.ipynb">Lab · Project 1</a></td>
+          </tr>
+          <tr>
+            <td class="num">13</td>
+            <td>Conditionals and Iteration</td>
+            <td><a href="./lab/index.html?path=lectures/lec13.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/-UhcNhNFln0" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/09/Randomness.html">Ch. 9</a>,
+              <a href="https://www.inferentialthinking.com/chapters/09/1/Conditional_Statements.html">9.1</a>,
+              <a href="https://www.inferentialthinking.com/chapters/09/2/Iteration.html">9.2</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">14</td>
+            <td>Chance</td>
+            <td><a href="./lab/index.html?path=lectures/lec14.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/Z4PP4wfbeOQ" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/09/3/Simulation.html">9.3</a>,
+              <a href="https://www.inferentialthinking.com/chapters/09/4/Monty_Hall_Problem.html">9.4</a></td>
+            <td><a href="./lab/index.html?path=hw/hw05/hw05.ipynb">Homework 5</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 6</td>
+            <td class="num">—</td>
+            <td class="holiday">Holiday · No class</td>
+            <td class="muted">—</td>
+            <td class="muted">—</td>
+            <td class="muted">—</td>
+            <td><a href="./lab/index.html?path=lab/lab05/lab05.ipynb">Lab 5 · Conditionals, iteration, tables</a></td>
+          </tr>
+          <tr>
+            <td class="num">15</td>
+            <td>Sampling</td>
+            <td><a href="./lab/index.html?path=lectures/lec15.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/fD2wGhOo-Ng" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/09/5/Finding_Probabilities.html">9.5</a>,
+              <a href="https://www.inferentialthinking.com/chapters/10/Sampling_and_Empirical_Distributions.html">Ch. 10</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">16</td>
+            <td>Models</td>
+            <td><a href="./lab/index.html?path=lectures/lec16.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/kiu3ZStwXY8" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/10/2/Sampling_from_a_Population.html">10.2</a>,
+              <a href="https://www.inferentialthinking.com/chapters/10/3/Empirical_Distribution_of_a_Statistic.html">10.3</a>,
+              <a href="https://www.inferentialthinking.com/chapters/10/4/Random_Sampling_in_Python.html">10.4</a></td>
+            <td><a href="./lab/index.html?path=hw/hw06/hw06.ipynb">Homework 6</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 7</td>
+            <td class="num">17</td>
+            <td>Comparing Distributions</td>
+            <td><a href="./lab/index.html?path=lectures/lec17.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/ondio0efWMo" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/11/1/Assessing_a_Model.html">11.1</a>,
+              <a href="https://www.inferentialthinking.com/chapters/11/2/Multiple_Categories.html">11.2</a></td>
+            <td><a href="./lab/index.html?path=lab/lab06/lab06.ipynb">Lab 6 · Assessing models</a></td>
+          </tr>
+          <tr>
+            <td class="num">18</td>
+            <td>Decisions and Uncertainty</td>
+            <td><a href="./lab/index.html?path=lectures/lec18.ipynb">Demo</a></td>
+            <td><a href="https://www.youtube.com/watch?v=C8EbzXMagtQ" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/11/3/Decisions_and_Uncertainty.html">11.3</a>,
+              <a href="https://www.inferentialthinking.com/chapters/11/4/Error_Probabilities.html">11.4</a></td>
+            <td><a href="./lab/index.html?path=hw/hw07/hw07.ipynb">Homework 7</a></td>
+          </tr>
+          <tr>
+            <td class="num">19</td>
+            <td>A/B Testing</td>
+            <td><a href="./lab/index.html?path=lectures/lec19.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/d-KZHimvbxg" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/11/4/Error_Probabilities.html">11.4</a>,
+              <a href="https://www.inferentialthinking.com/chapters/12/1/AB_Testing.html">12.1</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 8</td>
+            <td class="num">20</td>
+            <td>Causality</td>
+            <td><a href="./lab/index.html?path=lectures/lec20.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/fD_VNWNIHDk" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/12/2/Causality.html">12.2</a></td>
+            <td class="muted">Lab · Midterm review (see course)</td>
+          </tr>
+          <tr>
+            <td class="num">21</td>
+            <td>Examples</td>
+            <td><a href="./lab/index.html?path=lectures/lec21.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/tjTFPFeg1Hk" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/12/3/Deflategate.html">12.3</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">22</td>
+            <td>Midterm Review</td>
+            <td class="muted">—</td>
+            <td><a href="https://youtu.be/oTwr-hGvAho" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td class="muted">—</td>
+            <td><span class="muted">Midterm exam</span></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 9</td>
+            <td class="num">23</td>
+            <td>Confidence Intervals</td>
+            <td><a href="./lab/index.html?path=lectures/lec23.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/g5ySSjoQESQ" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/13/Estimation.html">Ch. 13</a>,
+              <a href="https://www.inferentialthinking.com/chapters/13/1/Percentiles.html">13.1</a>,
+              <a href="https://www.inferentialthinking.com/chapters/13/2/Bootstrap.html">13.2</a></td>
+            <td><a href="./lab/index.html?path=lab/lab07/lab07.ipynb">Lab 7 · A/B testing</a></td>
+          </tr>
+          <tr>
+            <td class="num">24</td>
+            <td>Interpreting Confidence</td>
+            <td><a href="./lab/index.html?path=lectures/lec24.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/XqXoOuXg-74" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/13/3/Confidence_Intervals.html">13.3</a>,
+              <a href="https://www.inferentialthinking.com/chapters/13/4/Using_Confidence_Intervals.html">13.4</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">25</td>
+            <td>Center and Spread</td>
+            <td><a href="./lab/index.html?path=lectures/lec25.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/SVAdCdjdRFw" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/14/Why_the_Mean_Matters.html">Ch. 14</a>,
+              <a href="https://www.inferentialthinking.com/chapters/14/1/Properties_of_the_Mean.html">14.1</a>,
+              <a href="https://www.inferentialthinking.com/chapters/14/2/Variability.html">14.2</a></td>
+            <td><a href="./lab/index.html?path=hw/hw08/hw08.ipynb">Homework 8</a></td>
+          </tr>
+
+          <tr>
+            <td class="week" rowspan="3">Week 10</td>
+            <td class="num">26</td>
+            <td>The Normal Distribution</td>
+            <td><a href="./lab/index.html?path=lectures/lec26.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/_ztwQ6osfBU" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/14/3/SD_and_the_Normal_Curve.html">14.3</a>,
+              <a href="https://www.inferentialthinking.com/chapters/14/4/Central_Limit_Theorem.html">14.4</a></td>
+            <td><a href="./lab/index.html?path=lab/lab08/lab08.ipynb">Lab 8 · Sample means</a></td>
+          </tr>
+          <tr>
+            <td class="num">27</td>
+            <td>Sample Means</td>
+            <td><a href="./lab/index.html?path=lectures/lec27.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/rWjKVzWOWBQ" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/14/5/Variability_of_the_Sample_Mean.html">14.5</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">28</td>
+            <td>Designing Experiments</td>
+            <td><a href="./lab/index.html?path=lectures/lec28.ipynb">Demo</a></td>
+            <td><a href="https://www.youtube.com/watch?v=X_I0JdNb18" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/14/6/Choosing_a_Sample_Size.html">14.6</a></td>
+            <td>
+              <a href="./lab/index.html?path=hw/hw09/hw09.ipynb">Homework 9</a><br>
+              <a href="./lab/index.html?path=project/project2/project2.ipynb">Project 2 · Climate</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 11</td>
+            <td class="num">29</td>
+            <td>Correlation</td>
+            <td><a href="./lab/index.html?path=lectures/lec29.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/8sX_uQUhPl0" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/15/Prediction.html">Ch. 15</a>,
+              <a href="https://www.inferentialthinking.com/chapters/15/1/Correlation.html">15.1</a></td>
+            <td><a href="./lab/index.html?path=project/project2/project2.ipynb">Lab · Project 2</a></td>
+          </tr>
+          <tr>
+            <td class="num">30</td>
+            <td>Linear Regression</td>
+            <td><a href="./lab/index.html?path=lectures/lec30.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/cPJRpfONHhY" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/15/2/Regression_Line.html">15.2</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">31</td>
+            <td>Least Squares</td>
+            <td><a href="./lab/index.html?path=lectures/lec31.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/ThfdnVkirtE" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/15/3/Method_of_Least_Squares.html">15.3</a>,
+              <a href="https://www.inferentialthinking.com/chapters/15/4/Least_Squares_Regression.html">15.4</a></td>
+            <td><a href="./lab/index.html?path=hw/hw10/hw10.ipynb">Homework 10</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 12</td>
+            <td class="num">32</td>
+            <td>Residuals</td>
+            <td><a href="./lab/index.html?path=lectures/lec32.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/kDqq-qMML4I" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/15/5/Visual_Diagnostics.html">15.5</a>,
+              <a href="https://www.inferentialthinking.com/chapters/15/6/Numerical_Diagnostics.html">15.6</a></td>
+            <td><a href="./lab/index.html?path=lab/lab09/lab09.ipynb">Lab 9 · Regression</a></td>
+          </tr>
+          <tr>
+            <td class="num">33</td>
+            <td>Regression Inference</td>
+            <td><a href="./lab/index.html?path=lectures/lec33.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/BnYXQjJ1wog" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/16/Inference_for_Regression.html">Ch. 16</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">34</td>
+            <td>Privacy (Guest Lecture)</td>
+            <td class="muted">—</td>
+            <td><a href="https://youtu.be/ihc3k5Ov9ec" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td class="muted">—</td>
+            <td>
+              <a href="./lab/index.html?path=hw/hw11/hw11.ipynb">Homework 11</a><br>
+              <a href="./lab/index.html?path=project/project3/project3.ipynb">Project 3 · Classifying movies</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="3">Week 13</td>
+            <td class="num">35</td>
+            <td>Classification</td>
+            <td><a href="./lab/index.html?path=lectures/lec35.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/U2LBRcPH1A4" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/17/Classification.html">Ch. 17</a>,
+              <a href="https://www.inferentialthinking.com/chapters/17/1/Nearest_Neighbors.html">17.1</a>–<a href="https://www.inferentialthinking.com/chapters/17/3/Rows_of_Tables.html">17.3</a></td>
+            <td><a href="./lab/index.html?path=project/project3/project3.ipynb">Lab · Project 3</a></td>
+          </tr>
+          <tr>
+            <td class="num">36</td>
+            <td>Classifiers</td>
+            <td><a href="./lab/index.html?path=lectures/lec36.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/XwMPGx9LJDU" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/17/4/Implementing_the_Classifier.html">17.4</a></td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">37</td>
+            <td>Updating Probabilities</td>
+            <td><a href="./lab/index.html?path=lectures/lec37.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/rQkLwLNbNKE" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td><a href="https://www.inferentialthinking.com/chapters/18/Updating_Predictions.html">Ch. 18</a></td>
+            <td><a href="./lab/index.html?path=hw/hw12/hw12.ipynb">Homework 12</a></td>
+          </tr>
+          <tr>
+            <td class="week" rowspan="4">Week 14</td>
+            <td class="num">38</td>
+            <td>Case Study: Health</td>
+            <td><a href="./lab/index.html?path=lectures/lec38.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/XiLK2al764c" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td class="muted">—</td>
+            <td><a href="./lab/index.html?path=lab/lab10/lab10.ipynb">Lab 10 · Conditional probability</a></td>
+          </tr>
+          <tr>
+            <td class="num">39</td>
+            <td>Case Study: Education</td>
+            <td><a href="./lab/index.html?path=lectures/lec39.ipynb">Demo</a></td>
+            <td><a href="https://youtu.be/zjEe1IJMVIc" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td class="muted">—</td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">40</td>
+            <td>Conclusion</td>
+            <td class="muted">—</td>
+            <td><a href="https://youtu.be/rXlh7W5lsiM" target="_blank" rel="noopener noreferrer">Watch</a></td>
+            <td class="muted">—</td>
+            <td class="muted">—</td>
+          </tr>
+          <tr>
+            <td class="num">—</td>
+            <td>Final Exam</td>
+            <td class="muted">—</td>
+            <td class="muted">—</td>
+            <td class="muted">—</td>
+            <td><span class="muted">Final exam</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="site">
+    Schedule topics, dates, and video links match the public example at
+    <a href="https://github.com/data-8/materials-fds">github.com/data-8/materials-fds</a>.
+    Your instructor’s syllabus takes precedence.
+  </footer>
+</body>
+</html>
